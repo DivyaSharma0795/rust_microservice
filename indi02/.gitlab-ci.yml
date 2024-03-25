@@ -13,20 +13,23 @@ stages:
   - docker
 
 cargo_build:
-  image: rust:latest
+  image: rustlang/rust:nightly
   stage: build
   script:
+    - cd indi02
     - cargo build --verbose
 
 cargo_test:
-  image: rust:latest
+  image: rustlang/rust:nightly
   stage: test
   script:
+    - cd indi02
     - cargo test --verbose
 
 docker_build:
   stage: docker
   script:
     - docker build . -t myapp
-    - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    - docker push myapp
+    - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+    - docker tag myapp $DOCKERHUB_USERNAME/myapp
+    - docker push $DOCKERHUB_USERNAME/myapp

@@ -1,4 +1,4 @@
-FROM rust:1.54 as builder
+FROM rustlang/rust:nightly as builder
 WORKDIR /usr/src/indi02
 COPY . .
 RUN cargo install --path .
