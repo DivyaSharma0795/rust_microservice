@@ -25,9 +25,3 @@ cargo_test:
   script:
     - cd indi02
     - cargo test --verbose
-
-docker_build:
-  stage: docker
-  script:
-    - docker logout
-    - docker build . -t myapp

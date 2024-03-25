@@ -56,7 +56,6 @@ The service will be available at `http://localhost:3030/`
 The CI/CD pipeline is configured using GitLab CI. The pipeline consists of the following stages:
 -   Build: Builds the project.
 -   Test: Runs the tests.
--   Docker: Builds the Docker image.
 
 The pipeline is triggered on every push to the repository. This project includes a .gitlab-ci.yml file for continuous integration and deployment with GitLab CI. To use it, you need to set the DOCKERHUB_USERNAME and DOCKERHUB_PASSWORD variables in your GitLab project's CI/CD settings.
 
