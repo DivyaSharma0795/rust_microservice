@@ -1,0 +1,36 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+stages:
+  - build
+  - test
+  - docker
+
+cargo_build:
+  image: rust:latest
+  stage: build
+  script:
+    - cd indi02
+    - cargo build --verbose
+
+cargo_test:
+  image: rust:latest
+  stage: test
+  script:
+    - cd indi02
+    - cargo test --verbose
+
+docker_build:
+  stage: docker
+  script:
+    - cd indi02
+    - docker build . -t myapp
+    - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+    - docker tag myapp $DOCKERHUB_USERNAME/myapp
+    - docker push $DOCKERHUB_USERNAME/myapp
