@@ -30,7 +30,4 @@ docker_build:
   stage: docker
   script:
     - docker logout
-    - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
     - docker build . -t myapp
-    - docker tag myapp $DOCKERHUB_USERNAME/myapp
-    - docker push $DOCKERHUB_USERNAME/myapp
