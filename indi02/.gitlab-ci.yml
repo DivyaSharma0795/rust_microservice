@@ -1,0 +1,32 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+stages:
+  - build
+  - test
+  - docker
+
+cargo_build:
+  image: rust:latest
+  stage: build
+  script:
+    - cargo build --verbose
+
+cargo_test:
+  image: rust:latest
+  stage: test
+  script:
+    - cargo test --verbose
+
+docker_build:
+  stage: docker
+  script:
+    - docker build . -t myapp
+    - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - docker push myapp
