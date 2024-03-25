@@ -30,6 +30,6 @@ docker_build:
   stage: docker
   script:
     - docker build . -t myapp
-    - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+    - cat $DOCKERHUB_PASSWORD_FILE | docker login -u $DOCKERHUB_USERNAME --password-stdin
     - docker tag myapp $DOCKERHUB_USERNAME/myapp
     - docker push $DOCKERHUB_USERNAME/myapp
