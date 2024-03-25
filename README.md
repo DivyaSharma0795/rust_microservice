@@ -1,5 +1,5 @@
 # Individual Project 02 - Continuous Delivery of Rust Microservice
-
+I need v and b 
 Requirements:
 
 -   Simple REST API/web service in Rust
