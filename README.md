@@ -52,6 +52,16 @@ docker run -p 3030:3030 rust-microservice
 
 The service will be available at `http://localhost:3030/`
 
+To call the service, use `http://localhost:3030/hello/YourNameHere` replacing the `YourNameHere` with the required name.
+
+Example of the file running locally on Rust:
+
+![Local Program Run](Screenshots/Service_Running.png)
+
+Example of Web Servie on Localhost:
+
+![Localhhost Run](Screenshots/Service_Website_localhost.png)
+
 ### CI/CD
 The CI/CD pipeline is configured using GitLab CI. The pipeline consists of the following stages:
 -   Build: Builds the project.
